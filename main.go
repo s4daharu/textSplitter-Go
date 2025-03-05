@@ -7,9 +7,13 @@ import (
 )
 
 func main() {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
 	http.HandleFunc("/", handleIndex)
 	http.HandleFunc("/split", handleSplit)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":"+port, nil)
 }
 
 func handleIndex(w http.ResponseWriter, r *http.Request) {
